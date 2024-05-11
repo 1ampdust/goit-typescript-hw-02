@@ -1,0 +1,22 @@
+.imageGallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    row-gap: 30px;
+    margin: 30px 20px;
+}
+
+.imageGalleryCard {
+    transition: transform .3s;
+    border: 1px solid #b39bc8;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.imageGalleryCard:hover,
+.imageGalleryCard:focus {
+    transform: scale(1.05);
+    border: 1px solid #f172a1;
+    cursor: pointer;
+}

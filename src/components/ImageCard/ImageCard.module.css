@@ -1,0 +1,22 @@
+.cardImage {
+    height: 300px;
+    width: 300px;
+    object-fit: cover;
+}
+
+.cardImageInfo {
+    background-color: #b39bc8;
+    color: #ececec;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.cardImageText {
+    font-size: 16px;
+    display: inline-block;
+        max-width: 200px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+}

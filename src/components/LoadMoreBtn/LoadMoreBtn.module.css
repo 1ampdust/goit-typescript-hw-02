@@ -1,0 +1,21 @@
+.loadMoreBtn {
+    background-color: #a1c3d1;
+    width: 130px;
+    height: 40px;
+    border: none;
+    box-shadow: -5px 5px 6px -1px rgba(0, 0, 0, 0.75);
+    -webkit-transition: background-color 1s ease-out;
+        -moz-transition: background-color 1s ease-out;
+        -o-transition: background-color 1s ease-out;
+        transition: background-color 1s ease-out;
+}
+
+.loadMoreBtn:focus {
+    outline: none;
+    background-color: #f172a1;
+}
+.loadMoreBtn:hover {
+    outline: none;
+    background-color: #f172a1;
+    cursor: pointer;
+}
