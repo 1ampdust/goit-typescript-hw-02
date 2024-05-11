@@ -8,11 +8,11 @@ type SearchBarProps = {
 };
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
-  const handleSubmit = (values: { search: string }, actions: { resetForm: () => void }) => {
-    const formattedSearch = values.search.trim().toLowerCase();
+  const handleSubmit = ({ search }: { search: string }, { resetForm }: { resetForm: () => void }) => {
+    const formattedSearch = search.trim();
     if (formattedSearch !== '') {
-      onSubmit(formattedSearch);
-      actions.resetForm();
+      onSubmit(formattedSearch.toLowerCase());
+      resetForm();
     } else {
       toast.error('Enter your search term!');
     }
