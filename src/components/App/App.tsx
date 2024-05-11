@@ -1,24 +1,25 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
-import Loader from "./components/Loader/Loader";
-import ErrorMessage from "./components/ErrorMassage/ErrorMassage";
-import SearchBar from "./components/SearchBar/SearchBar";
-import ImageGallery from "./components/ImageGallery/ImageGallery";
-import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
-import ImageModal from "./components/ImageModal/ImageModal";
+import Loader from "../Loader/Loader";
+import ErrorMessage from "../ErrorMassage/ErrorMassage";
+import SearchBar from "../SearchBar/SearchBar";
+import ImageGallery from "../ImageGallery/ImageGallery";
+import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
+import ImageModal from "../ImageModal/ImageModal";
 import { Toaster, toast } from "react-hot-toast";
+import { Image } from "./App.types";
 
-const App = () => {
-  const [images, setImages] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [error, setError] = useState(null);
-  const [mainLoading, setMainLoading] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [loadingMore, setLoadingMore] = useState(false);
+const App: React.FC = () => {
+  const [images, setImages] = useState<Image[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(1);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [error, setError] = useState<Error | null>(null);
+  const [mainLoading, setMainLoading] = useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = useState<Image | null>(null);
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [loadingMore, setLoadingMore] = useState<boolean>(false);
 
   useEffect(() => {
     if (searchQuery !== "") {
@@ -36,7 +37,7 @@ const App = () => {
             toast.error("Nothing was found for your request");
           }
         })
-        .catch((err) => {
+        .catch((err: Error) => {
           setError(err);
         })
         .finally(() => {
@@ -46,7 +47,7 @@ const App = () => {
     }
   }, [searchQuery, currentPage]);
 
-  const handleSubmit = (searchQuery) => {
+  const handleSubmit = (searchQuery: string) => {
     if (searchQuery.trim() !== "") {
       setSearchQuery(searchQuery);
 
@@ -64,7 +65,7 @@ const App = () => {
     }
   };
 
-  const openModal = (image) => {
+  const openModal = (image: Image) => {
     setSelectedImage(image);
     setModalIsOpen(true);
   };
@@ -84,8 +85,7 @@ const App = () => {
           {loadingMore && <Loader />}
         </>
       )}
-      {error && <ErrorMessage error={error} />}
-
+      {error && <ErrorMessage message={error.message} />}
       <Toaster position="top-right" reverseOrder={false} />
       <ImageModal
         isOpen={modalIsOpen}

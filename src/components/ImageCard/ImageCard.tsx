@@ -1,18 +1,16 @@
 import css from "./ImageCard.module.css";
+import { Image } from "../App/App.types";
 
-const ImageCard = ({ image, onImageClick }) => {
-  const imageCardInfo = {
-    imageSrc: image.urls.regular,
-    imageAltDescription: image.alt_description,
-    imageDescription: image.description,
-    imageAutor: image.user.name,
-    imageLikes: image.likes,
-  };
+export type ImageCardProps = {
+  image: Image;
+  onImageClick: (image: Image) => void;
+};
 
+const ImageCard: React.FC<ImageCardProps> = ({ image, onImageClick }) => {
   return (
     <div>
       <img
-        onClick={() => onImageClick(imageCardInfo)}
+        onClick={() => onImageClick(image)}
         className={css.cardImage}
         src={image.urls.small}
         alt={image.alt_description}

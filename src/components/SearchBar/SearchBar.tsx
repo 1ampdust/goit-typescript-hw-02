@@ -3,8 +3,12 @@ import css from './SearchBar.module.css';
 import magnifyingGlassSvg from './magnifyingGlass.svg';
 import { toast } from 'react-hot-toast';
 
-const SearchBar = ({ onSubmit }) => {
-  const handleSubmit = (values, actions) => {
+type SearchBarProps = {
+  onSubmit: (searchQuery: string) => void;
+};
+
+const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
+  const handleSubmit = (values: { search: string }, actions: { resetForm: () => void }) => {
     const formattedSearch = values.search.trim().toLowerCase();
     if (formattedSearch !== '') {
       onSubmit(formattedSearch);
