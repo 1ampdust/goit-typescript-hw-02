@@ -1,3 +1,4 @@
+// ImageModal.tsx
 import Modal from "react-modal";
 import css from "./ImageModal.module.css";
 import { Image } from "../App/App.types";
@@ -11,7 +12,7 @@ type ImageModalProps = {
 };
 
 const ImageModal: React.FC<ImageModalProps> = ({ isOpen, image, onCloseModal }) => {
-  const imageSrc = image && image.imageSrc;
+  const imageSrc = image && image.urls.regular;
 
   return (
     <Modal

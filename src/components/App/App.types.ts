@@ -10,5 +10,4 @@ export interface Image {
     name: string;
   };
     likes: number;
-  imageSrc: string;
 }
