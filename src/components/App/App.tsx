@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { AxiosResponse } from "axios";
 import "./App.css";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMassage/ErrorMassage";
@@ -9,6 +10,12 @@ import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "../ImageModal/ImageModal";
 import { Toaster, toast } from "react-hot-toast";
 import { Image } from "./App.types";
+
+interface UnsplashResponse {
+  total: number;
+  total_pages: number;
+  results: Image[];
+}
 
 const App: React.FC = () => {
   const [images, setImages] = useState<Image[]>([]);
@@ -30,10 +37,11 @@ const App: React.FC = () => {
         .get(
           `https://api.unsplash.com/search/photos?page=${currentPage}&query=${searchQuery}&client_id=YDBQCrbMETFmkVpqYgAfBUJ0SZGTv2ePc5Uq0Tkx6UU`
         )
-        .then((res) => {
-          setImages((prevImages) => [...prevImages, ...res.data.results]);
-          setTotalPages(res.data.total_pages);
-          if (res.data.results.length === 0) {
+        .then((res: AxiosResponse<UnsplashResponse>) => {
+          const responseData: UnsplashResponse = res.data;
+          setImages((prevImages) => [...prevImages, ...responseData.results]);
+          setTotalPages(responseData.total_pages);
+          if (responseData.results.length === 0) {
             toast.error("Nothing was found for your request");
           }
         })
